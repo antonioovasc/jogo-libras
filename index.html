@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Quest</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main id="app">
+
+        <!-- TELA 1 - INÍCIO COM NOME -->
+        <section id="tela-inicio" class="tela ativa">
+            <div class="inicio" style="max-width: 900px; margin: 0 auto; padding: 2rem 1rem;">
+
+                <!-- GRID GLOBAL: 2 COLUNAS -->
+                <div class="container-inicio" style="
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            align-items: stretch;
+        ">
+
+                    <!-- CARD 1: TOPO (OCUPA AS 2 COLUNAS) -->
+                    <div class="card marcabox-inicio" style="
+                grid-column: span 2;
+                background: #ffffff;
+                border-radius: 20px;
+                padding: 2.5rem 2rem;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            ">
+                        <div class="personagem-grande" style="font-size: 3.5rem; margin-bottom: 0.5rem;">🤖</div>
+                        <h1 class="logo" style="margin: 0; font-size: 2.2rem; color: #0f172a;">CODE <span
+                                style="color: #2563eb;">QUEST</span></h1>
+                        <p class="subtitulo" style="color: #64748b; font-size: 1rem; margin: 0.5rem 0 1.5rem 0;">Uma
+                            aventura de lógica, desafios e tecnologia</p>
+
+                        <div class="form-nome-inicio" style="width: 100%; max-width: 320px;">
+                            <input type="text" id="nome-jogador" class="campo-nome" maxlength="20"
+                                placeholder="Digite seu nome" style="
+                        width: 100%;
+                        padding: 0.85rem;
+                        border: 1px solid #cbd5e1;
+                        border-radius: 10px;
+                        text-align: center;
+                        font-size: 1rem;
+                        box-sizing: border-box;
+                    ">
+                            <p id="erro-nome" class="mensagem-erro"
+                                style="margin: 0.25rem 0 0 0; color: #dc2626; font-size: 0.8rem;"></p>
+                            <button class="btn btn-principal" onclick="salvarNome()" style="
+                        width: 100%;
+                        padding: 0.85rem;
+                        background: #2563eb;
+                        color: white;
+                        border: none;
+                        border-radius: 10px;
+                        font-weight: bold;
+                        font-size: 1rem;
+                        cursor: pointer;
+                        margin-top: 0.75rem;
+                    ">INICIAR</button>
+                        </div>
+                    </div>
+
+                    <!-- CARD 2: VÍDEO LIBRAS (ESQUERDA EMBAIXO) -->
+                    <div class="card card-video" style="
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+    width: 100%;
+    height: 49%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+">
+                        <video controls class="video-libras-tela" style="
+        width: 115%;
+        height: 130%;
+        min-height: 320px;
+        border: none;
+        border-radius: 16px;
+        object-fit: cover;
+        display: block;
+        background: #000;
+    ">
+                            <source src="assets/libras/video.mp4" type="video/mp4">
+                            Seu navegador não suporta a exibição deste vídeo.
+                        </video>
+                    </div>
+                    <!-- CARD 3: REGRAS E OBJETIVO (DIREITA EMBAIXO) -->
+                    <div class="card card-central" style="
+                background: #ffffff;
+                border-radius: 20px;
+                width: 100%;
+                height: 49%;
+                padding: 1.5rem;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            ">
+                        <h2 style="font-size: 1.05rem; color: #0f172a; margin: 0;">Ajude o Byte a chegar até o 💻</h2>
+                        <p style="color: #64748b; font-size: 0.8rem; margin: 0.4rem 0 1rem 0;">Escolha os comandos para
+                            criar um caminho.</p>
+
+                        <div class="exemplo-comandos" style="
+                    display: flex;
+                    gap: 0.3rem;
+                    background: #f1f5f9;
+                    padding: 0.5rem 0.8rem;
+                    border-radius: 8px;
+                    margin-bottom: 1rem;
+                ">
+                            <span>🤖</span> <span>➡️</span> <span>➡️</span> <span>⬇️</span> <span>⬇️</span>
+                            <span>💻</span>
+                        </div>
+
+                        <div class="regras" style="
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 0.5rem;
+                    width: 100%;
+                    margin-bottom: 1rem;
+                ">
+                            <div
+                                style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 0.4rem; border-radius: 8px; font-size: 0.75rem;">
+                                <span>⬆️</span> Subir
+                            </div>
+                            <div
+                                style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 0.4rem; border-radius: 8px; font-size: 0.75rem;">
+                                <span>⬇️</span> Descer
+                            </div>
+                            <div
+                                style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 0.4rem; border-radius: 8px; font-size: 0.75rem;">
+                                <span>⬅️</span> Esquerda
+                            </div>
+                            <div
+                                style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 0.4rem; border-radius: 8px; font-size: 0.75rem;">
+                                <span>➡️</span> Direita
+                            </div>
+                        </div>
+
+                        <p class="destaque" style="color: #d97706; font-size: 0.75rem; font-weight: bold; margin: 0;">
+                            ⚠️ Cuidado com os obstáculos!
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- TELA 5 - JOGO -->
+        <section id="tela-jogo" class="tela">
+            <header class="cabecalho-jogo">
+                <div class="logo-pequeno">CODE <span>QUEST</span></div>
+                <div class="informacoes-jogador">
+                    <div>👤 <strong id="nome-jogador-jogo">Jogador</strong></div>
+                    <div>⭐ <strong id="pontuacao">0</strong></div>
+                </div>
+            </header>
+
+            <div class="titulo-fase">
+                <span id="numero-fase">FASE 1</span>
+                <h2 id="titulo-fase">Primeiro Passo</h2>
+                <p id="descricao-fase">Leve o Byte até o computador.</p>
+            </div>
+
+            <div class="area-jogo">
+                <div class="tabuleiro-container">
+                    <div id="tabuleiro" class="tabuleiro"></div>
+                </div>
+
+                <div class="painel-controles">
+                    <h3>🎮 Comandos</h3>
+                    <p>Monte sua sequência:</p>
+                    <div id="sequencia" class="sequencia"></div>
+
+                    <div class="controles-direcao">
+                        <button onclick="adicionarComando('up')">⬆️</button>
+                        <button onclick="adicionarComando('left')">⬅️</button>
+                        <button onclick="adicionarComando('down')">⬇️</button>
+                        <button onclick="adicionarComando('right')">➡️</button>
+                    </div>
+
+                    <button class="btn btn-secundario btn-largo" onclick="limparComandos()">DELETAR</button>
+                    <button class="btn btn-principal btn-largo" onclick="executarComandos()">▶ EXECUTAR</button>
+                    <div id="mensagem-jogo" class="mensagem-jogo"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TELA 6 - VITÓRIA -->
+        <section id="tela-vitoria" class="tela">
+            <div class="card card-central">
+                <!-- Elementos ocultos para não quebrar o JavaScript -->
+                <span id="nome-vitoria" style="display: none;"></span>
+                <div class="pontos-ganhos" style="display: none;"><span id="pontos-ganhos"></span></div>
+                <strong id="palavra-vitoria" style="display: none;"></strong>
+
+                <div>
+                    <small></small>
+                    <div class="card-passo">
+                        <video controls class="video-libras-tela">
+                            <source src="assets/libras/video.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="acoes-sucesso">
+                        <button id="botao-proxima-fase" class="btn btn-principal btn-largo"
+                            style="background-color: green;" onclick="proximaFase()">
+                            PRÓXIMA FASE
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- TELA 7 - ERRO -->
+        <section id="tela-erro" class="tela">
+            <div class="card card-central container-erro">
+
+                <video controls class="video-libras-tela">
+                    <source src="assets/libras/video.mp4" type="video/mp4">
+                </video>
+                <br>
+                <div class="acoes-erro">
+                    <button class="btn btn-principal btn-largo" style="background-color: orange;"
+                        onclick="voltarParaFase()">
+                        TENTAR NOVAMENTE
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- TELA 8 - RESULTADO FINAL -->
+        <section id="tela-final" class="tela">
+            <div class="card card-central">
+                <div class="resultado-icone">🏆</div>
+                <span class="tag sucesso">MISSÃO COMPLETA</span>
+                <h1>Parabéns!</h1>
+                <p><strong id="nome-final"></strong>, você completou o CODE QUEST!</p>
+                <div class="pontuacao-final">
+                    <small>PONTUAÇÃO FINAL</small>
+                    <strong id="pontuacao-final">0 ⭐</strong>
+                </div>
+                <div class="estatisticas">
+                    <div class="estatistica"><strong>5</strong><span>Fases</span></div>
+                    <div class="estatistica"><strong>5</strong><span>Desafios</span></div>
+                    <div class="estatistica"><strong></strong><span>Libras</span></div>
+                </div>
+                <button class="btn btn-principal" onclick="reiniciarJogo()">🔄 JOGAR NOVAMENTE</button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- MODAL LIBRAS -->
+    <div id="modal-libras" class="modal">
+        <div class="modal-conteudo">
+            <button class="fechar-modal" onclick="fecharLibras()">×</button>
+            <span class="icone-libras"></span>
+            <h2 id="titulo-libras">AJUDAR</h2>
+            <div class="video-libras">
+                <span></span>
+                <p>Vídeo em Libras</p>
+            </div>
+            <p>Aqui será colocado o vídeo correspondente ao sinal.</p>
+            <button class="btn btn-secundario" onclick="fecharLibras()">FECHAR</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
