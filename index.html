@@ -113,7 +113,7 @@
               </div>
             </div>
 
-            <!-- CARD 2: VÍDEO LIBRAS (ESQUERDA EMBAIXO) -->
+            <!-- CARD 2: VLIBRAS (ESQUERDA EMBAIXO) -->
             <div
               class="card card-video"
               style="
@@ -130,23 +130,34 @@
                 text-align: center;
               "
             >
-              <video
-                controls
-                class="video-libras-tela"
+              <div
+                class="personagem-grande"
+                style="font-size: 3rem; margin-bottom: 0.5rem"
+              >
+                🤟
+              </div>
+              <h2
                 style="
-                  width: 115%;
-                  height: 130%;
-                  min-height: 320px;
-                  border: none;
-                  border-radius: 16px;
-                  object-fit: cover;
-                  display: block;
-                  background: #000;
+                  font-size: 1.05rem;
+                  color: #0f172a;
+                  margin: 0 0 0.4rem 0;
                 "
               >
-                <source src="assets/libras/video.mp4" type="video/mp4" />
-                Seu navegador não suporta a exibição deste vídeo.
-              </video>
+                Acessibilidade em Libras
+              </h2>
+              <p
+                style="
+                  color: #64748b;
+                  font-size: 0.8rem;
+                  margin: 0 0 1rem 0;
+                "
+              >
+                Ative o Widget do VLibras para traduzir o jogo e as palavras
+                das fases.
+              </p>
+              <button class="btn btn-principal" onclick="abrirVLibrasWidget()">
+                ATIVAR VLIBRAS
+              </button>
             </div>
             <!-- CARD 3: REGRAS E OBJETIVO (DIREITA EMBAIXO) -->
             <div
@@ -324,34 +335,51 @@
           <div class="pontos-ganhos" style="display: none">
             <span id="pontos-ganhos"></span>
           </div>
-          <strong id="palavra-vitoria" style="display: none"></strong>
 
-          <div>
-            <small></small>
-            <div class="card-passo">
-              <video controls class="video-libras-tela">
-                <source src="assets/libras/video.mp4" type="video/mp4" />
-              </video>
-            </div>
-            <div class="acoes-sucesso">
-              <button
-                id="botao-proxima-fase"
-                class="btn btn-principal btn-largo"
-                style="background-color: green"
-                onclick="proximaFase()"
-              >
-                PRÓXIMA FASE
-              </button>
-            </div>
+          <div class="caixa-palavra">
+            <span class="tag sucesso">FASE COMPLETA</span>
+            <small>PALAVRA DA FASE</small>
+            <strong id="palavra-vitoria" class="palavra-vitoria">INÍCIO</strong>
+            <p class="dica-libras">
+              Com o VLibras aberto, clique na palavra para ver o sinal.
+            </p>
+            <button
+              class="btn btn-secundario btn-largo"
+              onclick="abrirLibras(palavraAtual)"
+            >
+              🤟 VER EM LIBRAS
+            </button>
+          </div>
+
+          <div class="acoes-sucesso">
+            <button
+              id="botao-proxima-fase"
+              class="btn btn-principal btn-largo"
+              style="background-color: green"
+              onclick="proximaFase()"
+            >
+              PRÓXIMA FASE
+            </button>
           </div>
         </div>
       </section>
       <!-- TELA 7 - ERRO -->
       <section id="tela-erro" class="tela">
         <div class="card card-central container-erro">
-          <video controls class="video-libras-tela">
-            <source src="assets/libras/video.mp4" type="video/mp4" />
-          </video>
+          <div
+            class="resultado-icone"
+            style="font-size: 3.5rem; margin-bottom: 0.5rem"
+          >
+            😕
+          </div>
+          <h1
+            style="font-size: 1.6rem; color: #0f172a; margin: 0 0 0.4rem 0"
+          >
+            Ops!
+          </h1>
+          <p style="color: #64748b; font-size: 0.9rem; margin: 0">
+            O Byte bateu em um obstáculo ou saiu do tabuleiro.
+          </p>
           <br />
           <div class="acoes-erro">
             <button
@@ -394,14 +422,19 @@
     <div id="modal-libras" class="modal">
       <div class="modal-conteudo">
         <button class="fechar-modal" onclick="fecharLibras()">×</button>
-        <span class="icone-libras"></span>
+        <span class="icone-libras">🤟</span>
         <h2 id="titulo-libras">AJUDAR</h2>
-        <div class="video-libras">
-          <span></span>
-          <p>Vídeo em Libras</p>
-        </div>
-        <p>Aqui será colocado o vídeo correspondente ao sinal.</p>
-        <button class="btn btn-secundario" onclick="fecharLibras()">
+        <p class="dica-libras">
+          Para ver esta palavra em Libras, abra o Widget do VLibras e clique
+          na palavra exibida na tela.
+        </p>
+        <button
+          class="btn btn-principal btn-largo"
+          onclick="abrirVLibrasWidget()"
+        >
+          ABRIR VLIBRAS
+        </button>
+        <button class="btn btn-secundario btn-largo" onclick="fecharLibras()">
           FECHAR
         </button>
       </div>

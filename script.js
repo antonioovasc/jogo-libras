@@ -803,6 +803,20 @@ function fecharLibras() {
   document.getElementById("modal-libras").classList.remove("aberto");
 }
 
+function abrirVLibrasWidget() {
+  fecharLibras();
+
+  const botaoWidget = window.VLibrasWidget && window.VLibrasWidget.initBtn;
+
+  if (botaoWidget) {
+    botaoWidget.click();
+  } else {
+    alert(
+      "O Widget do VLibras ainda está carregando. Aguarde alguns instantes e tente novamente.",
+    );
+  }
+}
+
 /* ===================================================== 
    COMO JOGAR 
 ===================================================== */

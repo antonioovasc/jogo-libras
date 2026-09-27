@@ -645,6 +645,46 @@ body {
 .fechar-modal:hover { background: var(--cinza-hover); color: var(--texto); }
 
 /* =====================================================
+   PALAVRA DA FASE EM LIBRAS
+===================================================== */
+
+.caixa-palavra {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 24px 20px;
+    margin-bottom: 16px;
+    background: var(--primary-subtle);
+    border: 1px solid var(--card-border);
+    border-radius: var(--raio-card);
+}
+
+.caixa-palavra small {
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.palavra-vitoria {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--texto);
+    line-height: 1.2;
+}
+
+.dica-libras {
+    color: var(--texto-secundario);
+    font-size: 13px;
+    font-weight: 500;
+    margin: 0;
+    max-width: 320px;
+}
+
+/* =====================================================
    RESPONSIVIDADE
 ===================================================== */
 
