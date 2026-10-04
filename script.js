@@ -13,6 +13,22 @@ let faseAtual = 0;
 let comandos = [];
 let palavraAtual = "";
 
+/* =====================================================
+   ÍCONES EM SVG (mesmos desenhos da biblioteca do HTML)
+   ===================================================== */
+
+const SVG_ICONE = '<svg class="ic" aria-hidden="true"><use href="#';
+
+const ICONES = {
+  robo: SVG_ICONE + 'i-byte-mini"></use></svg>',
+  objetivo: SVG_ICONE + 'i-computador"></use></svg>',
+  obstaculo: SVG_ICONE + 'i-x"></use></svg>',
+  up: SVG_ICONE + 'i-seta-cima"></use></svg>',
+  down: SVG_ICONE + 'i-seta-baixo"></use></svg>',
+  left: SVG_ICONE + 'i-seta-esquerda"></use></svg>',
+  right: SVG_ICONE + 'i-seta-direita"></use></svg>',
+};
+
 /* ===================================================== 
    CONFIGURAÇÃO DAS FASES (25 Fases)
 ===================================================== */
@@ -526,7 +542,7 @@ function salvarNome() {
 
   if (nome === "") {
     if (erroElemento)
-      erroElemento.textContent = "Digite seu nome para continuar.";
+      erroElemento.textContent = "Digite seu codinome para continuar.";
     return;
   }
 
@@ -597,13 +613,13 @@ function desenharTabuleiro(posicao = null) {
 
       if (obstaculo) {
         celula.classList.add("obstaculo");
-        celula.textContent = "⬛";
+        celula.innerHTML = ICONES.obstaculo;
       } else if (roboEstaAqui) {
         celula.classList.add("robo");
-        celula.textContent = "🤖";
+        celula.innerHTML = ICONES.robo;
       } else if (objetivo) {
         celula.classList.add("objetivo");
-        celula.textContent = "💻";
+        celula.innerHTML = ICONES.objetivo;
       }
 
       tabuleiro.appendChild(celula);
@@ -633,17 +649,10 @@ function atualizarSequencia() {
   const area = document.getElementById("sequencia");
   area.innerHTML = "";
 
-  const icones = {
-    up: "⬆️",
-    down: "⬇️",
-    left: "⬅️",
-    right: "➡️",
-  };
-
   comandos.forEach(function (comando) {
     const item = document.createElement("div");
     item.classList.add("comando-sequencia");
-    item.textContent = icones[comando];
+    item.innerHTML = ICONES[comando];
     area.appendChild(item);
   });
 }
@@ -748,9 +757,9 @@ function mostrarVitoria() {
   const botao = document.getElementById("botao-proxima-fase");
 
   if (faseAtual === fases.length - 1) {
-    botao.textContent = "VER RESULTADO 🏆";
+    botao.textContent = "Ver resultado final";
   } else {
-    botao.textContent = "PRÓXIMA FASE";
+    botao.textContent = "Próxima fase";
   }
 
   irPara("tela-vitoria");
@@ -763,7 +772,7 @@ function mostrarVitoria() {
 function proximaFase() {
   if (faseAtual === fases.length - 1) {
     document.getElementById("nome-final").textContent = nomeJogador;
-    document.getElementById("pontuacao-final").textContent = pontuacao + " ⭐";
+    document.getElementById("pontuacao-final").textContent = pontuacao;
     irPara("tela-final");
     return;
   }

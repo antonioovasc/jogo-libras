@@ -1,551 +1,613 @@
 /* =====================================================
-   CODE QUEST - DESIGN CLEAN, MODERNO E ELEGANTE
-===================================================== */
+   CODE QUEST - DESIGN DIDÁTICO ACESSÍVEL
+   Estética: clara, amigável e caprichada para sala de aula
+   Tipografia: Baloo 2 (display/botões) + Nunito (corpo)
+   ===================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap');
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
 :root {
-    /* Fundo suave com grid discreto */
-    --fundo-base: #f8fafc;
-    --grid-cor: rgba(148, 163, 184, 0.12);
-    
-    /* Paleta Principal: Azul & Cinza */
-    --primary: #2563eb;              /* Azul Elegante */
-    --primary-hover: #1d4ed8;
-    --primary-subtle: #eff6ff;
-    
-    --accent: #10b981;               /* Verde de Sucesso/Destaque */
-    --accent-hover: #059669;
-    
-    --cinza-bg: #f1f5f9;
-    --cinza-borda: #e2e8f0;
-    --cinza-hover: #cbd5e1;
-    
-    --vermelho-status: #ef4444;      /* Status/Alerta */
+    /* Paleta clara didática */
+    --branco: #FFFFFF;
+    --papel: #F5F8F4;
+    --papel-escuro: #E6EEE6;
+    --tinta: #2E3A46;
+    --tinta-suave: #5C6B78;
+    --verde: #4FC15C;
+    --verde-escuro: #2C7A3D;
+    --verde-claro: #EAF9EE;
+    --amarelo: #FFC93C;
+    --amarelo-escuro: #E8A81C;
+    --amarelo-claro: #FFF7E0;
+    --coral: #FF6B6B;
+    --coral-claro: #FFE9E9;
+    --coral-escuro: #C93A3A;
+    --azul: #58AEE8;
+    --azul-escuro: #2E86C8;
+    --azul-claro: #E3F2FC;
+    --linha: #DCE6DB;
 
-    /* Textos */
-    --texto: #1e293b;                /* Grafite Escuro */
-    --texto-secundario: #64748b;     /* Cinza Médio */
-
-    /* Superfícies e Cards */
-    --card-bg: #ffffff;
-    --card-border: #e2e8f0;
-    
-    /* Geometria Suave */
-    --raio-card: 16px;
-    --raio-btn: 10px;
-    --raio-badge: 6px;
-    
-    /* Sombras Leves e Modernas */
-    --sombra-card: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.05);
-    --sombra-btn: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+    /* Geometria */
+    --raio-lg: 20px;
+    --raio-md: 14px;
+    --raio-sm: 10px;
 }
 
 body {
     min-height: 100vh;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    color: var(--texto);
-    background-color: var(--fundo-base);
-    background-image: 
-        linear-gradient(var(--grid-cor) 1px, transparent 1px),
-        linear-gradient(90deg, var(--grid-cor) 1px, transparent 1px);
-    background-size: 32px 32px;
+    font-family: 'Nunito', sans-serif;
+    color: var(--tinta);
+    background-color: var(--papel);
     overflow-x: hidden;
-    position: relative;
+    line-height: 1.5;
 }
 
 #app {
     width: 100%;
-    max-width: 1140px;
+    max-width: 1100px;
     min-height: 100vh;
     margin: 0 auto;
-    padding: 24px;
-    position: relative;
-    z-index: 1;
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Detalhes do navegador que também fazem parte do design */
+::selection {
+    background: var(--amarelo);
+    color: var(--tinta);
+}
+
+:focus-visible {
+    outline: 3px solid var(--azul-escuro);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--papel-escuro);
+    border-radius: 999px;
 }
 
 /* =====================================================
-   TELAS & TRANSIÇÕES
-===================================================== */
-
+   TELAS & ANIMAÇÃO DE ENTRADA
+   ===================================================== */
 .tela {
     display: none;
     width: 100%;
-    min-height: calc(100vh - 48px);
-    animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    min-height: calc(100vh - 4rem);
+    animation: entrada 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .tela.ativa {
     display: flex;
+    flex-direction: column;
 }
 
-@keyframes fadeIn {
-    from { 
-        opacity: 0; 
-        transform: translateY(6px); 
+@keyframes entrada {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
     }
-    to { 
-        opacity: 1; 
-        transform: translateY(0); 
+    to {
+        opacity: 1;
+        transform: none;
     }
 }
 
 /* =====================================================
-   CARDS & ESTRUTURAS
-===================================================== */
-
-.card {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: var(--raio-card);
-    box-shadow: var(--sombra-card);
-    transition: all 0.2s ease;
-}
-
-.card-central {
-    width: 100%;
-    max-width: 520px;
-    margin: auto;
-    padding: 36px 32px;
-    text-align: center;
-    border-radius: var(--raio-card);
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    box-shadow: var(--sombra-card);
-}
-
-/* =====================================================
-   TELA INICIAL
-===================================================== */
-
-#tela-inicio {
-    justify-content: center;
-    align-items: center;
-    padding: 20px 0;
-}
-
-#tela-inicio .inicio {
-    width: 100%;
-    max-width: 1080px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-}
-
-.container-inicio {
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-    gap: 28px;
-    width: 100%;
-}
-
-.marcabox-inicio {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 32px;
-    background: #ffffff;
-    border: 1px solid var(--card-border);
-    border-radius: var(--raio-card);
-    box-shadow: var(--sombra-card);
-}
-
-.container-inicio .card-central {
-    flex: 1;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.personagem-grande {
-    font-size: 72px;
-    margin-bottom: 12px;
-    line-height: 1;
-}
-
-.logo {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(34px, 4vw, 48px);
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    color: var(--texto);
-    line-height: 1.1;
-}
-
-.logo span { 
-    color: var(--primary);
-}
-
-.subtitulo {
-    color: var(--texto-secundario);
-    font-size: 15px;
-    font-weight: 500;
-    margin: 10px 0 24px;
-    max-width: 420px;
-    line-height: 1.5;
-}
-
-/* =====================================================
-   BOTÕES ELEGANTES
-===================================================== */
-
+   BOTÕES GORDOS
+   ===================================================== */
 .btn {
-    border: 1px solid transparent;
-    border-radius: var(--raio-btn);
-    padding: 12px 24px;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 15px;
+    font-family: 'Baloo 2', sans-serif;
     font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--tinta);
     cursor: pointer;
-    transition: all 0.2s ease;
-    user-select: none;
+    border: none;
+    border-bottom: 4px solid transparent;
+    border-radius: var(--raio-md);
+    padding: 0.65rem 1.5rem;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
+    transition: transform 0.12s ease, filter 0.12s ease, background-color 0.12s ease, border-color 0.12s ease;
+}
+
+.btn:active {
+    transform: translateY(2px);
+    border-bottom-width: 2px;
+}
+
+.btn .ic {
+    width: 18px;
+    height: 18px;
 }
 
 .btn-principal {
-    color: #ffffff;
-    background: var(--primary);
-    box-shadow: var(--sombra-btn);
+    background: var(--verde);
+    border-bottom-color: var(--verde-escuro);
 }
 
 .btn-principal:hover {
-    background: var(--primary-hover);
-    transform: translateY(-1px);
-}
-
-.btn-principal:active {
-    transform: translateY(0);
+    filter: brightness(1.06);
 }
 
 .btn-secundario {
-    color: var(--texto);
-    background: var(--cinza-bg);
-    border-color: var(--cinza-borda);
+    background: var(--branco);
+    border: 2px solid var(--linha);
+    border-bottom: 4px solid var(--papel-escuro);
 }
 
 .btn-secundario:hover {
-    background: var(--cinza-hover);
-    color: var(--texto);
+    background: var(--papel);
+    border-color: var(--verde);
 }
 
 .btn-largo {
     width: 100%;
-    margin-top: 12px;
+}
+
+.btn-alerta {
+    background: #FF8A80;
+    border-bottom-color: #E56B62;
+}
+
+.btn-alerta:hover {
+    filter: brightness(1.04);
 }
 
 /* =====================================================
-   CAMPOS & INPUTS
-===================================================== */
-
-.form-nome-inicio {
-    width: 100%;
-    max-width: 320px;
+   TELA INICIAL
+   ===================================================== */
+.hero {
+    text-align: center;
+    padding: 3rem 1rem 1rem;
+    max-width: 640px;
     margin: 0 auto;
+    width: 100%;
+}
+
+.mascote-grande {
+    width: 150px;
+    height: 122px;
+    margin-bottom: 0.5rem;
+    animation: aparecer 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    filter: drop-shadow(0 6px 12px rgba(46, 58, 70, 0.14));
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: scale(0.6);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.logo {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.6rem, 7vw, 3.6rem);
+    letter-spacing: -0.02em;
+    color: var(--verde-escuro);
+    margin-bottom: 0.4rem;
+}
+
+.subtitulo {
+    color: var(--tinta-suave);
+    font-size: 1.12rem;
+    max-width: 44ch;
+    margin: 0 auto 2rem;
+    line-height: 1.55;
+}
+
+.form-nome-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
 }
 
 .campo-nome {
-    width: 100%;
-    padding: 12px 16px;
-    border-radius: var(--raio-btn);
-    border: 1.5px solid var(--card-border);
-    outline: none;
-    background: #ffffff;
-    color: var(--texto);
-    font-size: 15px;
+    background: var(--branco);
+    border: 2px solid var(--linha);
+    border-radius: var(--raio-md);
+    padding: 0.85rem 1.2rem;
+    color: var(--tinta);
+    font-family: 'Nunito', sans-serif;
     font-weight: 600;
+    font-size: 1.05rem;
     text-align: center;
-    transition: all 0.2s ease;
+    width: 100%;
+    max-width: 340px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.campo-nome::placeholder {
+    color: var(--tinta-suave);
+    opacity: 0.75;
 }
 
 .campo-nome:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 4px var(--primary-subtle);
+    outline: none;
+    border-color: var(--verde);
+    box-shadow: 0 0 0 4px rgba(79, 193, 92, 0.22);
 }
 
 .mensagem-erro {
-    min-height: 20px;
-    color: var(--vermelho-status);
-    font-size: 13px;
-    font-weight: 600;
-    margin-top: 6px;
-}
-
-.tag {
-    display: inline-block;
-    padding: 4px 12px;
-    border-radius: var(--raio-badge);
-    background: var(--primary-subtle);
-    color: var(--primary);
-    font-size: 12px;
+    color: var(--coral-escuro);
     font-weight: 700;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    margin-bottom: 12px;
+    font-size: 0.95rem;
+    min-height: 1.3em;
 }
 
-.tag.sucesso { background: #d1fae5; color: var(--accent); }
-.tag.erro { background: #fee2e2; color: var(--vermelho-status); }
-
-/* =====================================================
-   INSTRUÇÕES E DICAS
-===================================================== */
-
-.exemplo-comandos {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    margin: 16px auto;
-    padding: 10px 16px;
-    max-width: 340px;
-    background: var(--cinza-bg);
-    border-radius: var(--raio-btn);
-    border: 1px solid var(--cinza-borda);
-    font-size: 22px;
-}
-
-.regras {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-    margin-bottom: 16px;
-}
-
-.regras div {
-    padding: 10px 4px;
-    border-radius: var(--raio-btn);
-    background: var(--cinza-bg);
-    border: 1px solid var(--cinza-borda);
-}
-
-.regras span { font-size: 18px; }
-.regras p { font-size: 11px; margin-top: 4px; color: var(--texto-secundario); font-weight: 600; }
-
-.destaque {
-    color: orange;
-    margin-bottom: 16px;
-    font-size: 13px;
-    font-weight: 600;
+/* Passos do jogo: uma faixa, três etapas em sequência */
+.passos {
+    background: var(--branco);
+    border: 2px solid var(--linha);
+    border-radius: var(--raio-lg);
+    padding: 1.5rem 1.8rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    max-width: 860px;
+    margin: 2.5rem auto 0;
+    width: 100%;
 }
 
-/* =====================================================
-   CABEÇALHO & TABULEIRO
-===================================================== */
-
-#tela-jogo {
-    display: none;
+.passo {
+    display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    max-width: 180px;
+    text-align: center;
 }
 
-#tela-jogo.ativa { display: flex; }
+.passo .ic {
+    width: 42px;
+    height: 42px;
+    color: var(--verde-escuro);
+}
 
+.passo h3 {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 1.12rem;
+}
+
+.passo p {
+    color: var(--tinta-suave);
+    font-size: 0.92rem;
+    line-height: 1.45;
+}
+
+.passo-seta {
+    flex: 0 0 auto;
+    color: var(--verde);
+}
+
+/* Painel de Libras na entrada */
+.painel-libras {
+    background: var(--azul-claro);
+    border: 2px solid var(--azul);
+    border-radius: var(--raio-lg);
+    padding: 1.4rem 1.6rem;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    max-width: 640px;
+    margin: 2rem auto 0;
+    width: 100%;
+}
+
+.selo-icone {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: var(--azul-escuro);
+    color: var(--branco);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+}
+
+.selo-icone .ic {
+    width: 30px;
+    height: 30px;
+}
+
+.painel-libras-texto {
+    flex: 1 1 220px;
+    text-align: left;
+}
+
+.painel-libras-texto h3 {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 1.12rem;
+}
+
+.painel-libras-texto p {
+    color: var(--tinta-suave);
+    font-size: 0.95rem;
+    line-height: 1.45;
+}
+
+/* =====================================================
+   TELA DE JOGO
+   ===================================================== */
 .cabecalho-jogo {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 24px;
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: var(--raio-card);
-    margin-bottom: 20px;
-    box-shadow: var(--sombra-card);
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    background: var(--branco);
+    border: 2px solid var(--linha);
+    border-radius: var(--raio-lg);
+    padding: 0.8rem 1.4rem;
+    margin-bottom: 1.5rem;
 }
 
-.logo-pequeno { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; }
-.logo-pequeno span { color: var(--primary); }
+.logo-pequeno {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 1.25rem;
+    color: var(--verde-escuro);
+}
 
 .informacoes-jogador {
     display: flex;
-    gap: 20px;
-    color: var(--texto-secundario);
-    font-size: 14px;
-    font-weight: 600;
+    gap: 0.7rem;
 }
 
-.informacoes-jogador strong { color: var(--texto); font-weight: 700; }
-
-/* Container do Título e Descrição da Fase */
-.titulo-fase {
-    margin-bottom: 20px;
-    padding: 0 4px;
-}
-
-.titulo-fase span { 
-    display: inline-block;
-    color: var(--primary); 
-    font-size: 12px; 
-    font-weight: 800; 
-    text-transform: uppercase; 
-    letter-spacing: 1px;
-    margin-bottom: 4px;
-}
-
-.titulo-fase h2 { 
-    font-family: 'Space Grotesk', sans-serif; 
-    font-size: 28px; 
+.info-item {
+    background: var(--papel);
+    border: 2px solid var(--linha);
+    border-radius: 999px;
+    padding: 0.3rem 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
     font-weight: 700;
-    color: var(--texto); 
-    line-height: 1.2;
+    font-size: 0.95rem;
 }
 
-.titulo-fase p { 
-    color: var(--texto-secundario); 
-    font-size: 14px; 
-    margin-top: 4px;
-    font-weight: 500;
+.info-item .ic {
+    width: 18px;
+    height: 18px;
+    color: var(--tinta-suave);
+}
+
+.info-estrela .ic {
+    color: var(--amarelo-escuro);
+}
+
+.fase-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.fase-meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-bottom: 0.25rem;
+}
+
+.fase-meta #numero-fase {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--tinta);
+    background: var(--amarelo);
+    border-bottom: 3px solid var(--amarelo-escuro);
+    padding: 0.1rem 0.8rem;
+    border-radius: 999px;
+}
+
+.fase-header h2 {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.6rem, 4vw, 2.1rem);
+}
+
+.fase-header p {
+    color: var(--tinta-suave);
 }
 
 .area-jogo {
     display: grid;
-    grid-template-columns: 1fr 340px;
-    gap: 20px;
-    flex: 1;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 1.5rem;
+    align-items: start;
 }
 
 .tabuleiro-container {
-    padding: 24px;
+    background: var(--branco);
+    border: 2px solid var(--linha);
+    border-radius: var(--raio-lg);
     display: flex;
-    align-items: center;
     justify-content: center;
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: var(--raio-card);
-    box-shadow: var(--sombra-card);
+    align-items: center;
+    padding: clamp(1rem, 4vw, 2rem);
 }
 
 .tabuleiro {
-    width: min(100%, 460px);
-    aspect-ratio: 1;
     display: grid;
     gap: 8px;
+    width: 100%;
+    max-width: 520px;
 }
 
-/* =====================================================
-   CÉLULAS DO TABULEIRO (ROBÔ QUADRADO COM CANTOS SUAVES)
-===================================================== */
-
 .celula {
-    border-radius: 12px;
-    background: #ffffff;
-    border: 1.5px solid var(--card-border);
+    aspect-ratio: 1;
+    background: var(--papel);
+    border: 2px solid var(--linha);
+    border-radius: var(--raio-sm);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: clamp(20px, 3.5vw, 32px);
-    transition: all 0.2s ease;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
-.celula.obstaculo {
-    background: #fef2f2;
-    border-color: #fca5a5;
+.celula .ic {
+    width: 58%;
+    height: 58%;
+}
+
+.celula.robo {
+    background: var(--verde-claro);
+    border-color: var(--verde);
+    z-index: 10;
+    animation: pulso 1.6s ease-in-out infinite;
+}
+
+@keyframes pulso {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
 }
 
 .celula.objetivo {
-    background: #eff6ff;
-    border: 1.5px dashed var(--primary);
+    background: var(--azul-claro);
+    border: 2px dashed var(--azul-escuro);
+    color: var(--azul-escuro);
 }
 
-/* Robô Retangular Padrão */
-.celula.robo {
-    background: var(--primary);
-    border-color: var(--primary-hover);
-    border-radius: 12px; 
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+.celula.obstaculo {
+    background: var(--coral-claro);
+    border-color: #F5B8B8;
+    color: var(--coral-escuro);
 }
-
-/* =====================================================
-   CONTROLES DO JOGO
-===================================================== */
 
 .painel-controles {
-    padding: 24px;
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: var(--raio-card);
+    background: var(--branco);
+    border: 2px solid var(--linha);
+    border-radius: var(--raio-lg);
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    box-shadow: var(--sombra-card);
+    gap: 1.2rem;
+    position: sticky;
+    top: 1rem;
 }
 
-.painel-controles h3 { font-family: 'Space Grotesk', sans-serif; margin-bottom: 2px; color: var(--texto); }
-.painel-controles > p { color: var(--texto-secundario); font-size: 13px; margin-bottom: 14px; }
+.painel-controles h3 {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.painel-controles h3 .ic {
+    width: 22px;
+    height: 22px;
+    color: var(--verde-escuro);
+}
 
 .sequencia {
-    min-height: 60px;
-    padding: 10px;
+    min-height: 76px;
+    background: var(--papel);
+    border: 2px solid var(--linha);
+    border-radius: var(--raio-md);
+    padding: 0.8rem;
     display: flex;
     flex-wrap: wrap;
+    gap: 6px;
     align-content: flex-start;
-    gap: 8px;
-    background: var(--cinza-bg);
-    border: 1px solid var(--cinza-borda);
-    border-radius: var(--raio-btn);
-    margin-bottom: 16px;
 }
 
 .comando-sequencia {
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--primary);
-    color: #ffffff;
-    font-weight: 700;
+    width: 34px;
+    height: 34px;
+    background: var(--verde);
+    color: var(--tinta);
+    border-bottom: 3px solid var(--verde-escuro);
     border-radius: 8px;
-    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: popIn 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.comando-sequencia .ic {
+    width: 20px;
+    height: 20px;
+}
+
+@keyframes popIn {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
 }
 
 .controles-direcao {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
-    max-width: 170px;
-    margin: 0 auto 16px;
+    width: 190px;
+    margin: 0 auto;
 }
 
 .controles-direcao button {
-    width: 50px;
-    height: 50px;
-    border: 1px solid var(--cinza-borda);
-    border-radius: 10px;
-    background: var(--cinza-bg);
-    color: var(--texto);
-    font-size: 18px;
-    font-weight: 700;
+    width: 58px;
+    height: 58px;
+    background: var(--branco);
+    border: 2px solid var(--linha);
+    border-bottom: 4px solid var(--papel-escuro);
+    border-radius: var(--raio-md);
+    color: var(--tinta);
     cursor: pointer;
-    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.12s ease, border-color 0.12s ease, background-color 0.12s ease;
+}
+
+.controles-direcao button .ic {
+    width: 26px;
+    height: 26px;
 }
 
 .controles-direcao button:hover {
-    background: var(--primary-subtle);
-    border-color: var(--primary);
-    color: var(--primary);
+    border-color: var(--verde);
+    background: var(--verde-claro);
 }
 
 .controles-direcao button:active {
-    transform: scale(0.96);
+    transform: translateY(2px);
+    border-bottom-width: 2px;
 }
 
 .controles-direcao button:nth-child(1) { grid-column: 2; }
@@ -553,152 +615,318 @@ body {
 .controles-direcao button:nth-child(3) { grid-column: 2; grid-row: 2; }
 .controles-direcao button:nth-child(4) { grid-column: 3; grid-row: 2; }
 
+.acoes-painel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
 .mensagem-jogo {
     text-align: center;
-    min-height: 24px;
-    margin-top: 12px;
-    font-size: 14px;
     font-weight: 700;
+    font-size: 0.95rem;
+    min-height: 1.3em;
 }
 
-.mensagem-jogo.sucesso { color: var(--accent); }
-.mensagem-jogo.erro { color: var(--vermelho-status); }
+.mensagem-jogo.sucesso {
+    color: var(--verde-escuro);
+}
+
+.mensagem-jogo.erro {
+    color: var(--coral-escuro);
+}
 
 /* =====================================================
-   PASSOS / MODAIS / VÍDEOS
-===================================================== */
-
-#tela-inicio .passos-container {
-    width: 100%;
-    display: flex;
-    gap: 16px;
-    overflow-x: auto;
-    padding: 4px 0 12px;
-}
-
-#tela-inicio .card-passo {
-    flex: 0 0 220px;
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: var(--raio-card);
-    padding: 14px;
+   VITÓRIA, ERRO & RESULTADO FINAL
+   ===================================================== */
+.card-vitoria, .card-erro, .card-final {
+    background: var(--branco);
+    border: 2px solid var(--linha);
+    border-radius: var(--raio-lg);
+    padding: 2.5rem 2rem;
     text-align: center;
-    box-shadow: var(--sombra-card);
-}
-
-#tela-inicio .card-passo h3 {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--primary);
-    margin-bottom: 8px;
-    text-transform: uppercase;
-}
-
-#tela-inicio .video-libras-tela {
+    max-width: 520px;
+    margin: auto;
     width: 100%;
-    height: 120px;
-    object-fit: cover;
-    border-radius: var(--raio-btn);
-    background: var(--cinza-bg);
-    border: 1px solid var(--cinza-borda);
 }
 
+.mascote-resultado {
+    width: 130px;
+    height: 113px;
+    margin-bottom: 0.6rem;
+    animation: aparecer 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card-vitoria h1, .card-erro h1, .card-final h1 {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.8rem, 5vw, 2.3rem);
+    margin-bottom: 0.5rem;
+}
+
+.card-vitoria p, .card-erro p, .card-final p {
+    color: var(--tinta-suave);
+    margin-bottom: 1.2rem;
+}
+
+.linha-pontos {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+}
+
+.linha-pontos strong,
+.pontos-ganhos-destaque {
+    color: var(--tinta);
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+}
+
+.pontos-ganhos-destaque {
+    color: var(--verde-escuro);
+    font-size: 1.2rem;
+}
+
+.caixa-palavra {
+    background: var(--amarelo-claro);
+    border: 2px solid var(--amarelo);
+    border-radius: var(--raio-md);
+    padding: 1.6rem;
+    margin: 1.4rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.palavra-linha {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.palavra-linha .ic {
+    width: 34px;
+    height: 34px;
+    color: var(--azul-escuro);
+    flex: 0 0 auto;
+}
+
+.palavra-vitoria {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.2rem, 7vw, 3rem);
+    letter-spacing: -0.02em;
+    color: var(--tinta);
+    margin: 0;
+}
+
+.dica-libras {
+    color: var(--tinta-suave);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    line-height: 1.45;
+}
+
+.acoes-sucesso {
+    display: flex;
+    flex-direction: column;
+}
+
+.pontuacao-final {
+    margin: 1.4rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+}
+
+.pontuacao-final .ic {
+    width: 40px;
+    height: 40px;
+    color: var(--amarelo-escuro);
+}
+
+.pontuacao-final strong {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 2.4rem;
+    color: var(--tinta);
+}
+
+.rotulo-pontos {
+    color: var(--tinta-suave);
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.estatisticas {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    margin-bottom: 1.8rem;
+}
+
+.estatistica {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.estatistica strong {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--tinta);
+}
+
+.estatistica span {
+    color: var(--tinta-suave);
+    font-size: 0.88rem;
+}
+
+/* =====================================================
+   MODAL
+   ===================================================== */
 .modal {
     position: fixed;
     inset: 0;
     display: none;
     align-items: center;
     justify-content: center;
+    background: rgba(46, 58, 70, 0.55);
+    z-index: 1000;
     padding: 20px;
-    background: rgba(15, 23, 42, 0.4);
-    backdrop-filter: blur(4px);
-    z-index: 100;
 }
 
-.modal.aberto { display: flex; }
+.modal.aberto {
+    display: flex;
+}
 
 .modal-conteudo {
-    width: 100%;
+    background: var(--branco);
+    border: 2px solid var(--linha);
+    border-radius: var(--raio-lg);
+    padding: 2.5rem 2rem;
     max-width: 440px;
-    padding: 28px;
+    width: 100%;
     text-align: center;
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: var(--raio-card);
     position: relative;
-    box-shadow: var(--sombra-card);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    animation: aparecer 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .fechar-modal {
     position: absolute;
-    top: 16px;
-    right: 16px;
-    width: 32px;
-    height: 32px;
-    border: 1px solid var(--cinza-borda);
-    border-radius: 50%;
-    background: var(--cinza-bg);
-    color: var(--texto-secundario);
+    top: 14px;
+    right: 14px;
+    background: none;
+    border: none;
+    color: var(--tinta-suave);
     cursor: pointer;
-}
-
-.fechar-modal:hover { background: var(--cinza-hover); color: var(--texto); }
-
-/* =====================================================
-   PALAVRA DA FASE EM LIBRAS
-===================================================== */
-
-.caixa-palavra {
+    padding: 4px;
+    border-radius: 6px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    padding: 24px 20px;
-    margin-bottom: 16px;
-    background: var(--primary-subtle);
-    border: 1px solid var(--card-border);
-    border-radius: var(--raio-card);
 }
 
-.caixa-palavra small {
-    color: var(--primary);
-    font-size: 12px;
+.fechar-modal:hover {
+    color: var(--tinta);
+}
+
+.fechar-modal .ic {
+    width: 20px;
+    height: 20px;
+}
+
+.mao-modal {
+    width: 52px;
+    height: 52px;
+    color: var(--azul-escuro);
+}
+
+.modal-conteudo h2 {
+    font-family: 'Baloo 2', sans-serif;
     font-weight: 800;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    font-size: 1.9rem;
 }
 
-.palavra-vitoria {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 32px;
-    font-weight: 700;
-    color: var(--texto);
-    line-height: 1.2;
+.modal-conteudo .dica-libras {
+    margin-bottom: 1.2rem;
 }
 
-.dica-libras {
-    color: var(--texto-secundario);
-    font-size: 13px;
-    font-weight: 500;
-    margin: 0;
-    max-width: 320px;
+.modal-conteudo .btn-secundario {
+    margin-top: 0.5rem;
 }
 
 /* =====================================================
    RESPONSIVIDADE
-===================================================== */
+   ===================================================== */
+@media (max-width: 900px) {
+    .area-jogo {
+        grid-template-columns: 1fr;
+    }
 
-@media (max-width: 860px) {
-    .container-inicio { flex-direction: column; }
-    .area-jogo { grid-template-columns: 1fr; }
-    .tabuleiro { width: 100%; max-width: 360px; }
-    .cabecalho-jogo { flex-direction: column; gap: 10px; text-align: center; }
+    .painel-controles {
+        position: static;
+    }
+
+    .cabecalho-jogo {
+        justify-content: center;
+    }
 }
 
-@media (max-width: 550px) {
-    #app { padding: 14px; }
-    .card-central { padding: 24px 18px; }
-    .marcabox-inicio { padding: 24px 16px; }
-    .regras { grid-template-columns: repeat(2, 1fr); }
-    .btn { width: 100%; }
+@media (max-width: 600px) {
+    #app {
+        padding: 1rem;
+    }
+
+    .hero {
+        padding-top: 1.5rem;
+    }
+
+    .mascote-grande {
+        width: 120px;
+        height: 98px;
+    }
+
+    .passos {
+        flex-direction: column;
+        gap: 0.8rem;
+        padding: 1.5rem 1.2rem;
+    }
+
+    .passo {
+        max-width: 100%;
+    }
+
+    .passo-seta {
+        transform: rotate(90deg);
+    }
+
+    .painel-libras {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .painel-libras-texto {
+        text-align: center;
+    }
+}
+
+/* =====================================================
+   MOVIMENTO REDUZIDO
+   ===================================================== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }
